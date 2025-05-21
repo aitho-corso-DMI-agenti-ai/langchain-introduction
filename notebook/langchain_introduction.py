@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.10"
+__generated_with = "0.13.11"
 app = marimo.App(width="medium")
 
 
@@ -351,7 +351,7 @@ def _(create_react_agent, llm, memory):
 def _(HumanMessage, react_agent):
     def invoke_react_agent(message, debug=False):
         # Estrarre il testo nel modo più sicuro possibile
-        text = str(getattr(message, "content", message))
+        text = getattr(message, "content", message)[-1].content
 
         response = react_agent.invoke(
             {"messages": HumanMessage(content=text)},
@@ -368,7 +368,7 @@ def _(HumanMessage, react_agent):
     return (invoke_react_agent,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(invoke_react_agent, mo):
     mo.ui.chat(
         invoke_react_agent,
@@ -460,7 +460,7 @@ def _(ChatOpenAI, MemorySaver, create_react_agent, os, wikipedia_tool):
 def _(HumanMessage, react_agent_w_tools):
     def invoke_tool_agent(message: str, debug=False):
         # Estrarre il testo nel modo più sicuro possibile
-        text = str(getattr(message, "content", message))
+        text = getattr(message, "content", message)[-1].content
 
         response = react_agent_w_tools.invoke(
             {"messages": HumanMessage(content=text)},
