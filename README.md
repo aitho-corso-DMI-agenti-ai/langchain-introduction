@@ -13,6 +13,8 @@ This repository contains example notebooks for the 2025 course [Agenti Intellige
 
 All the example notebooks and code are located in the `notebook/` directory.
 
+All the slides are located in the `slide/` directory.
+
 ## Setup Instructions
 
 ### 1. Install Poetry
